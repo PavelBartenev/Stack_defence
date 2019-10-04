@@ -41,16 +41,10 @@ int StackOK(struct stack_t*);
 long ControlSum(struct stack_t*);
 struct stack_t* MoreMemory(struct stack_t*);
 bool DumpFunction(struct stack_t*);
-int UnitTests(struct stack_t*);
-bool Test1(struct stack_t*);
-bool Test2(struct stack_t*);
-bool Test3(struct stack_t*);
 
 int main()
 {
 	struct stack_t* stk1 = StackConstruct();
-
-	UnitTests(stk1);
 
 	StackDestruct(stk1);
 
@@ -133,7 +127,7 @@ int StackDestruct(struct stack_t* this_)
 		this_->data[this_->size] = poison;
 	}
 
-	//free(this_);
+	free(this_);
 
 	return 0;
 }
@@ -306,50 +300,3 @@ bool DumpFunction(struct stack_t* this_)
 	exit(1);                                    
 }   
 
-
-int UnitTests(struct stack_t* this_)
-{
-	if (Test1(this_)) 
-	{ 
-		printf("Test 1 - OK"); 
-	}
-
-	else 
-	{ 
-		printf("test 1 - Failed"); 
-	}
-
-	return 0;
-}
-
-bool Test1(struct stack_t* this_)
-{
-	for (int i = 0; i < 100; i++)
-	{
-		this_ = StackPush(this_, i);
-
-	}
-
-	this_->size = 105;
-
-	StackOK(this_);
-
-	if (this_->error_codes[0] == 55) return true;
-
-	return false;
-}
-
-bool Test2(struct stack_t* this_)
-{
-	for (int i = 0; i < 100; i++)
-	{
-		this_ = StackPush(this_, i);
-
-	}
-
-	StackOK(this_);
-
-	if (this_->error_codes[0] == 55) return true;
-
-	return false;
-}
