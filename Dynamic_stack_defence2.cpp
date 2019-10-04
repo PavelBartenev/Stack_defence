@@ -347,8 +347,6 @@ bool Test2(struct stack_t* this_)
 
 	}
 
-	
-
 	StackOK(this_);
 
 	if (this_->error_codes[0] == 55) return true;
